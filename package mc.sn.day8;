@@ -1,0 +1,57 @@
+package mc.sn.day8;
+
+import java.util.Calendar;
+
+public class TestCalendar {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		TestCalendar tc = new TestCalendar();
+		//tc.test2();
+		tc.displayMonth(1991, 6);
+	}
+	
+	public void test1() {
+		// 싱글톤 
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+1;
+		int day = cal.get(Calendar.DAY_OF_MONTH);//일 정보
+		int date = cal.get(Calendar.DAY_OF_WEEK);//요일
+		System.out.println(year+"/"+month+"/"+day+" "+date);
+		
+		int hour = cal.get(Calendar.HOUR);
+		int min = cal.get(Calendar.MINUTE);
+		int sec = cal.get(Calendar.SECOND);
+		System.out.println(hour+":"+min+":"+sec);
+	}
+	
+	public void test2() {
+		Calendar cal = Calendar.getInstance();
+		cal.set(2021, 3, 1);// 4월이 3인 이유는 0부터 시작
+		int date = cal.get(Calendar.DAY_OF_WEEK);
+		int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		System.out.println("date = "+date+", lastDay = "+lastDay);
+	}
+	
+	public void displayMonth(int year, int month) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month-1, 1);
+		System.out.println("\t\t\t"+year+"년도 "+month+"월");
+		System.out.println("일\t월\t화\t수\t목\t금\t토");
+		int day = 0;
+		int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		int space = cal.get(Calendar.DAY_OF_WEEK)-1;
+		for (int k=0;k<space;k++) {
+			System.out.print("\t");
+		}
+		
+		for(int i=0;i<lastDay;i++) {
+			day = i+1;
+			System.out.print(day+"\t");
+			if ((space+day)%7==0) {
+				System.out.println();
+			} 
+		}
+	}
+}
